@@ -1,6 +1,6 @@
 # SDEV Spectrum — UI design rules
 
-This file is the visual contract for future SDEV Team pages and components. Use the homepage (`app/page.tsx`) and its styles (`app/globals.css`) as the reference implementation. The project uses Next.js, Tailwind CSS, shadcn primitives, Lucide icons, and custom CSS. “Spectrum” here names SDEV's colorful visual direction; there is no Adobe React Spectrum package installed.
+This file is the visual contract for future SDEV Team pages and components. Use the homepage (`app/page.tsx`) and its scoped styles (`app/home.css`) as the visual reference. `app/globals.css` holds Tailwind, shadcn theme variables, and shared base rules. The project uses Next.js, Tailwind CSS, shadcn primitives, Lucide icons, and custom CSS. “Spectrum” names SDEV's colorful visual direction; there is no Adobe React Spectrum package installed.
 
 ## Product character
 
@@ -11,7 +11,7 @@ This file is the visual contract for future SDEV Team pages and components. Use 
 
 ## Color system
 
-Use the semantic CSS variables scoped to `.site-shell`; they switch with the `.light` class from `next-themes`. New routes should use the same shell or an equivalent token scope.
+The homepage uses semantic CSS variables scoped to `.site-shell`; they switch with the `.light` class from `next-themes`. Other routes should use shadcn components and Tailwind utilities backed by the matching theme variables in `app/globals.css`.
 
 | Token | Dark | Light | Use |
 | --- | --- | --- | --- |
@@ -25,6 +25,7 @@ Use the semantic CSS variables scoped to `.site-shell`; they switch with the `.l
 | `--sdev-accent-strong` | `#724fee` | `#6544ab` | Strong actions |
 | `--sdev-cyan` | `#78d6e9` | `#21899f` | Secondary subject accent |
 | `--sdev-pink` | `#ed9bda` | `#a64993` | Third subject accent |
+| `--sdev-gold` | `#f4c766` | `#a86d16` | Coin icon |
 | `--sdev-focus` | `#ae8fff` | `#8159ce` | Keyboard focus |
 
 The primary button gradient is `--sdev-button-gradient`: `#a87fff → #724fee` at 110 degrees, with white text in both themes. Keep violet as the main action color. Use cyan and pink to distinguish content categories, not as competing primary buttons.
@@ -62,7 +63,7 @@ For a new color, define a semantic token in **both** themes first. Verify contra
 | Content card | `.course-card` | Subject accent, subtle decorative ring, elevation on hover |
 | Section label | `.section-kicker` | Small uppercase monospace, bracketed wording |
 
-For reusable actions, prefer a component over copying large CSS blocks. All buttons need hover, focus-visible, disabled, and loading states when applicable. A link that navigates should be an anchor; a button that changes state should be a button. Do not make decorative UI look actionable.
+These class patterns describe the homepage. For other routes, use shadcn components and Tailwind classes with the shared theme tokens. For reusable actions, prefer a component over copying large CSS blocks. All buttons need hover, focus-visible, disabled, and loading states when applicable. A link that navigates should be an anchor; a button that changes state should be a button. Do not make decorative UI look actionable.
 
 ## Motion
 

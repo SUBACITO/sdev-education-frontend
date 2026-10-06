@@ -11,7 +11,7 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      className="theme-toggle"
+      className="theme-toggle inline-grid size-11 place-items-center rounded-lg border border-border bg-card text-primary transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       aria-label={mounted && resolvedTheme === "dark" ? "Bật giao diện sáng" : "Bật giao diện tối"}
       title={mounted && resolvedTheme === "dark" ? "Giao diện sáng" : "Giao diện tối"}
