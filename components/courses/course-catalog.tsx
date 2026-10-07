@@ -12,7 +12,7 @@ import {
   SheetDescription,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { courses } from "../_data/courses"
+import { courses } from "../../app/(auth)/courses/_data/courses"
 
 type Course = (typeof courses)[number]
 type BattlePhase = "idle" | "cover" | "hold" | "reveal"
@@ -22,117 +22,132 @@ function CourseDetails({ course }: { course: Course }) {
 
   return (
     <>
-      <div className="relative overflow-hidden border-b border-border bg-secondary/50 px-7 pt-8 pb-9 sm:px-12 sm:pt-11 sm:pb-10">
-        <div
-          className={cn(
-            "pointer-events-none absolute -top-20 -right-14 size-72 rounded-full opacity-70 blur-3xl",
-            course.glow
-          )}
-          aria-hidden="true"
-        />
-        <span
-          className="pointer-events-none absolute -right-3 bottom-0 font-mono text-[clamp(8rem,21vw,16rem)] leading-none font-black tracking-[-0.12em] text-primary/10 select-none"
-          aria-hidden="true"
-        >
-          {course.number}
-        </span>
-        <div className="relative flex items-center gap-3 font-mono text-xs font-bold tracking-[0.2em] text-primary uppercase">
-          <span
-            className="h-1 w-7 skew-x-[-25deg] bg-primary"
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+        <div className="relative overflow-hidden border-b border-border bg-secondary/50 px-7 pt-8 pb-9 sm:px-12 sm:pt-11 sm:pb-10">
+          <div
+            className={cn(
+              "pointer-events-none absolute -top-20 -right-14 size-72 rounded-full opacity-70 blur-3xl",
+              course.glow
+            )}
             aria-hidden="true"
           />
-          {course.category} / HỒ SƠ KHÓA HỌC
-        </div>
-        <div className="relative mt-8 flex max-w-[780px] items-start gap-4 sm:mt-9 sm:gap-6">
           <span
-            className={cn(
-              "grid size-14 shrink-0 place-items-center rounded-2xl border border-border shadow-lg sm:size-18",
-              course.accent
-            )}
+            className="pointer-events-none absolute -right-3 bottom-0 font-mono text-[clamp(8rem,21vw,16rem)] leading-none font-black tracking-[-0.12em] text-primary/10 select-none"
+            aria-hidden="true"
           >
-            <Icon
-              className="size-7 sm:size-9"
-              strokeWidth={1.6}
+            {course.number}
+          </span>
+          <div className="relative flex items-center gap-3 font-mono text-xs font-bold tracking-[0.2em] text-primary uppercase">
+            <span
+              className="h-1 w-7 skew-x-[-25deg] bg-primary"
               aria-hidden="true"
             />
-          </span>
-          <div className="min-w-0 pt-0.5">
-            <p className="font-mono text-xs font-bold tracking-[0.16em] text-muted-foreground uppercase">
-              Lựa chọn #{course.number}
-            </p>
-            <SheetTitle className="mt-2 text-[clamp(1.65rem,2.6vw,2.5rem)] leading-[1.12] font-extrabold tracking-[-0.045em]">
-              {course.title}
-            </SheetTitle>
+            {course.category} / HỒ SƠ KHÓA HỌC
           </div>
-        </div>
-        <SheetDescription className="relative mt-5 max-w-[720px] text-sm leading-7 text-muted-foreground sm:mt-6 sm:text-base">
-          {course.description}
-        </SheetDescription>
-      </div>
-
-      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-7 py-8 sm:px-10 sm:py-10">
-        <div className="flex items-center justify-between gap-4 border-b border-border pb-4">
-          <h3 className="font-mono text-xs font-bold tracking-[0.16em] text-primary uppercase">
-            [ Nội dung chính ]
-          </h3>
-          <Sparkles className="size-4 text-sdev-gold" aria-hidden="true" />
-        </div>
-        <ul className="mt-5 grid gap-4">
-          {course.topics.map((topic, index) => (
-            <li
-              key={topic}
-              className="flex h-full items-start gap-4 rounded-xl border border-border bg-secondary/30 px-4 py-4 text-sm leading-6 sm:text-base"
+          <div className="relative mt-8 flex max-w-[780px] items-start gap-4 sm:mt-9 sm:gap-6">
+            <span
+              className={cn(
+                "grid size-14 shrink-0 place-items-center rounded-2xl border border-border shadow-lg sm:size-18",
+                course.accent
+              )}
             >
-              <span className="font-mono text-xs font-bold text-primary">
-                0{index + 1}
-              </span>
-              <span className="flex-1">{topic}</span>
-              <Check
-                className="mt-1 size-4 shrink-0 text-primary"
+              <Icon
+                className="size-7 sm:size-9"
+                strokeWidth={1.6}
                 aria-hidden="true"
               />
-            </li>
-          ))}
-        </ul>
-        <div className="mt-8 flex flex-wrap gap-2" aria-label="Công nghệ chính">
-          {course.stack.map((item) => (
-            <span
-              key={item}
-              className="rounded-md border border-border bg-secondary/60 px-3 py-1.5 font-mono text-xs text-secondary-foreground"
-            >
-              {item}
             </span>
-          ))}
+            <div className="min-w-0 pt-0.5">
+              <p className="font-mono text-xs font-bold tracking-[0.16em] text-muted-foreground uppercase">
+                Lựa chọn #{course.number}
+              </p>
+              <SheetTitle className="mt-2 text-[clamp(1.65rem,2.6vw,2.5rem)] leading-[1.12] font-extrabold tracking-[-0.045em]">
+                {course.title}
+              </SheetTitle>
+            </div>
+          </div>
+          <SheetDescription className="relative mt-5 max-w-[720px] text-sm leading-7 text-muted-foreground sm:mt-6 sm:text-base">
+            {course.description}
+          </SheetDescription>
         </div>
-        <div className="mt-auto pt-10">
-          <div className="flex items-end justify-between gap-4 border-t border-border pt-6">
-            <div>
-              <p className="text-sm text-muted-foreground">Giá khóa học</p>
-              <p
-                className="mt-1 flex items-center gap-2 text-[clamp(2rem,4vw,3rem)] leading-none font-black tracking-tight"
-                aria-label={`${course.price.toLocaleString("vi-VN")} xu`}
+
+        <div className="px-7 py-8 sm:px-10 sm:py-10">
+          <div className="flex items-center justify-between gap-4 border-b border-border pb-4">
+            <h3 className="font-mono text-xs font-bold tracking-[0.16em] text-primary uppercase">
+              [ Nội dung chính ]
+            </h3>
+            <Sparkles className="size-4 text-sdev-gold" aria-hidden="true" />
+          </div>
+          <ul className="mt-5 grid gap-4">
+            {course.topics.map((topic, index) => (
+              <li
+                key={topic}
+                className="flex h-full items-start gap-4 rounded-xl border border-border bg-secondary/30 px-4 py-4 text-sm leading-6 sm:text-base"
               >
-                {course.price.toLocaleString("vi-VN")}
-                <Coins
-                  className="size-7 text-sdev-gold"
-                  strokeWidth={1.8}
+                <span className="font-mono text-xs font-bold text-primary">
+                  0{index + 1}
+                </span>
+                <span className="flex-1">{topic}</span>
+                <Check
+                  className="mt-1 size-4 shrink-0 text-primary"
                   aria-hidden="true"
                 />
-              </p>
-            </div>
-            <span className="font-mono text-xs font-bold tracking-[0.2em] text-muted-foreground">
-              SDEV / {course.number}
-            </span>
-          </div>
-          <Link
-            href="/#dang-nhap"
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "mt-6 h-13 w-full gap-3 rounded-[9px] px-5 text-sm font-bold focus-visible:ring-ring sm:text-base"
-            )}
+              </li>
+            ))}
+          </ul>
+          <div
+            className="mt-8 flex flex-wrap gap-2"
+            aria-label="Công nghệ chính"
           >
-            Đăng nhập để đăng ký{" "}
-            <ArrowRight className="size-5" aria-hidden="true" />
+            {course.stack.map((item) => (
+              <span
+                key={item}
+                className="rounded-md border border-border bg-secondary/60 px-3 py-1.5 font-mono text-xs text-secondary-foreground"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="z-10 shrink-0 border-t border-border bg-card px-7 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-sm sm:px-10 sm:py-5">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className="text-sm text-muted-foreground">Giá khóa học</p>
+            <p
+              className="mt-1 flex items-center gap-2 text-[clamp(2rem,4vw,3rem)] leading-none font-black tracking-tight"
+              aria-label={`${course.price.toLocaleString("vi-VN")} xu`}
+            >
+              {course.price.toLocaleString("vi-VN")}
+              <Coins
+                className="size-7 text-sdev-gold"
+                strokeWidth={1.8}
+                aria-hidden="true"
+              />
+            </p>
+          </div>
+          <span className="font-mono text-xs font-bold tracking-[0.2em] text-muted-foreground">
+            SDEV / {course.number}
+          </span>
+        </div>
+        <Link
+          href="/#dang-nhap"
+          className={cn(
+            buttonVariants({ size: "lg" }),
+            "mt-4 h-12 w-full gap-3 rounded-[9px] bg-gradient-to-r from-sdev-action-start to-sdev-action-end px-5 text-sm font-bold text-white hover:opacity-90 focus-visible:ring-ring sm:text-base"
+          )}
+        >
+          Đăng ký học <ArrowRight className="size-5" aria-hidden="true" />
+        </Link>
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-xs">
+          <span className="text-muted-foreground">
+            Đăng nhập để tiếp tục đăng ký.
+          </span>
+          <Link
+            href={`/courses/${course.id}`}
+            className="font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            Xem chi tiết khóa học
           </Link>
         </div>
       </div>
@@ -357,7 +372,7 @@ export function CourseCatalog() {
             onPointerLeave={(event) => {
               if (event.pointerType === "mouse") scheduleClose()
             }}
-            className="h-dvh gap-0 overflow-x-clip overflow-y-auto border-l-4 border-primary bg-card p-0 text-foreground shadow-2xl shadow-primary/25 data-[side=right]:w-full data-[side=right]:sm:w-[80vw] data-[side=right]:sm:max-w-none data-[side=right]:lg:w-[50vw]"
+            className="h-dvh gap-0 overflow-hidden border-l-4 border-primary bg-card p-0 text-foreground shadow-2xl shadow-primary/25 data-[side=right]:w-full data-[side=right]:sm:w-[80vw] data-[side=right]:sm:max-w-none data-[side=right]:lg:w-[50vw]"
           >
             <SheetClose
               id="course-panel-close"

@@ -1,0 +1,836 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+The content has been processed where content has been compressed (code blocks are separated by ⋮---- delimiter).
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Content has been compressed - code blocks are separated by ⋮---- delimiter
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+app/
+  (auth)/
+    courses/
+      _data/
+        courses.ts
+      [slug]/
+        page.tsx
+      page.tsx
+    learning/
+      [slug]/
+        page.tsx
+    layout.tsx
+  (public)/
+    banner/
+      character.png
+  favicon.ico
+  globals.css
+  layout.tsx
+  page.tsx
+components/
+  courses/
+    course-catalog.tsx
+    course-detail.tsx
+  layout/
+    auth-footer.tsx
+    auth-header.tsx
+    home-footer.tsx
+    home-header.tsx
+    page-shell.tsx
+  learning/
+    exercises.ts
+    learning-data.ts
+    learning-workspace.tsx
+  ui/
+    button.tsx
+    sheet.tsx
+  .gitkeep
+  brand-logo.tsx
+  login-form.tsx
+  theme-provider.tsx
+  theme-toggle.tsx
+hooks/
+  .gitkeep
+lib/
+  types/
+    types.ts
+  .gitkeep
+  utils.ts
+public/
+  .gitkeep
+.aws
+.gitignore
+.prettierignore
+.prettierrc
+AGENTS.md
+CLAUDE.md
+components.json
+DESIGN.md
+eslint.config.mjs
+next.config.ts
+package.json
+postcss.config.mjs
+README.md
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="app/(auth)/courses/[slug]/page.tsx">
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+import { CourseDetail } from "@/components/courses/course-detail"
+import { courses } from "../_data/courses"
+⋮----
+type Props = { params: Promise<{ slug: string }> }
+⋮----
+export function generateStaticParams()
+⋮----
+export async function generateMetadata(
+⋮----
+export default async function CourseDetailPage(
+</file>
+
+<file path="app/(auth)/learning/[slug]/page.tsx">
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+import { LearningWorkspace } from "@/components/learning/learning-workspace"
+import {
+  getLearningCourse,
+  learningSlugs,
+} from "@/components/learning/learning-data"
+⋮----
+type Props = { params: Promise<{ slug: string }> }
+⋮----
+export function generateStaticParams()
+⋮----
+export async function generateMetadata(
+⋮----
+export default async function LearningPage(
+</file>
+
+<file path="components/courses/course-catalog.tsx">
+import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
+import { ArrowRight, Check, Coins, Sparkles, X } from "lucide-react"
+import { cn } from "cn"
+import { buttonVariants } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+} from "@/components/ui/sheet"
+import { courses } from "../../app/(auth)/courses/_data/courses"
+⋮----
+type Course = (typeof courses)[number]
+type BattlePhase = "idle" | "cover" | "hold" | "reveal"
+⋮----
+className=
+⋮----
+const cancelClose = () =>
+const clearBattle = () =>
+const runBattle = () =>
+const openCourse = (id: string) =>
+const scheduleClose = () =>
+const close = (restoreFocus = false) =>
+⋮----
+if (nextOpen) setOpen(true)
+else close()
+</file>
+
+<file path="components/courses/course-detail.tsx">
+import Link from "next/link"
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  BookOpen,
+  Check,
+  Coins,
+  Layers3,
+  LockKeyhole,
+  MonitorPlay,
+  Play,
+  Sparkles,
+} from "lucide-react"
+import { cn } from "cn"
+import { buttonVariants } from "@/components/ui/button"
+import { PageShell } from "@/components/layout/page-shell"
+import type { courses } from "@/app/(auth)/courses/_data/courses"
+⋮----
+type Course = (typeof courses)[number]
+</file>
+
+<file path="components/layout/auth-footer.tsx">
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
+import { BrandLogo } from "@/components/brand-logo"
+import { PageShell } from "./page-shell"
+⋮----
+export function AuthFooter()
+</file>
+
+<file path="components/layout/auth-header.tsx">
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
+import { cn } from "cn"
+import { buttonVariants } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { BrandLogo } from "@/components/brand-logo"
+import { PageShell } from "./page-shell"
+⋮----
+export function AuthHeader()
+</file>
+
+<file path="components/layout/home-footer.tsx">
+import { BrandLogo } from "@/components/brand-logo"
+import Link from "next/link"
+import { PageShell } from "./page-shell"
+⋮----
+export function HomeFooter()
+</file>
+
+<file path="components/layout/home-header.tsx">
+import { ArrowUpRight } from "lucide-react"
+import Link from "next/link"
+import { BrandLogo } from "@/components/brand-logo"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { PageShell } from "./page-shell"
+⋮----
+export function HomeHeader()
+</file>
+
+<file path="components/layout/page-shell.tsx">
+import type { HTMLAttributes } from "react"
+import { cn } from "cn"
+⋮----
+type PageShellProps = HTMLAttributes<HTMLElement> & {
+  as?: "div" | "main" | "section" | "header" | "footer"
+  size?: "wide" | "content"
+}
+⋮----
+export function PageShell({
+  as: Tag = "div",
+  size = "content",
+  className,
+  ...props
+}: PageShellProps)
+⋮----
+className=
+</file>
+
+<file path="components/learning/exercises.ts">
+export type Exercise = {
+  title: string
+  description: string
+  concept: string
+  example: string
+  starter: string
+  hint: string
+  testExpression: string
+  expected: string
+}
+⋮----
+export function getExercise(slug: string): Exercise
+</file>
+
+<file path="components/learning/learning-data.ts">
+import { courses } from "@/app/(auth)/courses/_data/courses"
+⋮----
+export type LearningCourse = {
+  slug: string
+  title: string
+  description: string
+  technology: string
+  lessons: readonly string[]
+}
+⋮----
+export function getLearningCourse(slug: string): LearningCourse | undefined
+</file>
+
+<file path="components/learning/learning-workspace.tsx">
+import { useState } from "react"
+import Link from "next/link"
+import {
+  ArrowLeft,
+  BookOpen,
+  Check,
+  CheckCircle2,
+  Circle,
+  Code2,
+  Lightbulb,
+  LockKeyhole,
+  Play,
+  RotateCcw,
+  Terminal,
+} from "lucide-react"
+import type { LearningCourse } from "./learning-data"
+import { getExercise } from "./exercises"
+⋮----
+type RunResult = { logs: string[]; value?: string; error?: string }
+⋮----
+function executeCode(code: string, expression?: string): Promise<RunResult>
+⋮----
+const finish = (result: RunResult) =>
+⋮----
+type Feedback = {
+  tone: "idle" | "success" | "error"
+  message: string
+  lines: string[]
+}
+⋮----
+async function run(mode: "try" | "submit")
+⋮----
+function reset()
+</file>
+
+<file path="app/(auth)/courses/_data/courses.ts">
+import {
+  Code2,
+  Container,
+  Database,
+  Layers3,
+  ServerCog,
+  Terminal,
+  Workflow,
+} from "lucide-react"
+</file>
+
+<file path="app/(auth)/courses/page.tsx">
+import type { Metadata } from "next"
+import Link from "next/link"
+import { CourseCatalog } from "../../../components/courses/course-catalog"
+import { courses } from "./_data/courses"
+import { PageShell } from "@/components/layout/page-shell"
+⋮----
+export default function CoursesPage()
+</file>
+
+<file path="app/(auth)/layout.tsx">
+import { AuthFooter } from "@/components/layout/auth-footer"
+import { AuthHeader } from "@/components/layout/auth-header"
+⋮----
+export default function AuthLayout({
+  children,
+}: Readonly<
+</file>
+
+<file path="app/layout.tsx">
+import { ThemeProvider } from "@/components/theme-provider"
+import type { Metadata } from "next"
+⋮----
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>)
+</file>
+
+<file path="components/ui/button.tsx">
+import { Button as ButtonPrimitive } from "@base-ui/react/button"
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "cn"
+⋮----
+className=
+</file>
+
+<file path="components/ui/sheet.tsx">
+import { Dialog as SheetPrimitive } from "@base-ui/react/dialog"
+import { cn } from "cn"
+⋮----
+import { Button } from "@/components/ui/button"
+import { XIcon } from "lucide-react"
+⋮----
+function Sheet(
+⋮----
+function SheetTrigger(
+⋮----
+function SheetClose(
+⋮----
+function SheetPortal(
+⋮----
+className=
+</file>
+
+<file path="components/.gitkeep">
+
+</file>
+
+<file path="components/brand-logo.tsx">
+import Link from "next/link"
+⋮----
+type BrandLogoProps = {
+  href: string
+  label?: string
+  compact?: boolean
+}
+⋮----
+export function BrandLogo({
+  href,
+  label = "SDEV Team - về trang chủ",
+  compact = false,
+}: BrandLogoProps)
+</file>
+
+<file path="components/login-form.tsx">
+import { useState } from "react"
+import { ArrowRight } from "lucide-react"
+import Image from "next/image"
+import character from "@/app/(public)/banner/character.png"
+⋮----
+function GoogleIcon()
+</file>
+
+<file path="components/theme-provider.tsx">
+import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
+⋮----
+function ThemeProvider({
+  children,
+  ...props
+}: React.ComponentProps<typeof NextThemesProvider>)
+⋮----
+function isTypingTarget(target: EventTarget | null)
+⋮----
+function ThemeHotkey()
+⋮----
+function onKeyDown(event: KeyboardEvent)
+</file>
+
+<file path="hooks/.gitkeep">
+
+</file>
+
+<file path="lib/types/types.ts">
+
+</file>
+
+<file path="lib/.gitkeep">
+
+</file>
+
+<file path="lib/utils.ts">
+
+</file>
+
+<file path="public/.gitkeep">
+
+</file>
+
+<file path=".aws">
+
+</file>
+
+<file path=".gitignore">
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+</file>
+
+<file path=".prettierignore">
+dist/
+node_modules/
+.next/
+.turbo/
+coverage/
+pnpm-lock.yaml
+.pnpm-store/
+</file>
+
+<file path=".prettierrc">
+{
+  "endOfLine": "lf",
+  "semi": false,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 80,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "app/globals.css",
+  "tailwindFunctions": ["cn", "cva"]
+}
+</file>
+
+<file path="CLAUDE.md">
+@AGENTS.md
+</file>
+
+<file path="components.json">
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "base-nova",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "rtl": false,
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "menuColor": "default",
+  "menuAccent": "subtle",
+  "registries": {}
+}
+</file>
+
+<file path="eslint.config.mjs">
+// Override default ignores of eslint-config-next.
+⋮----
+// Default ignores of eslint-config-next:
+</file>
+
+<file path="next.config.ts">
+import type { NextConfig } from "next"
+</file>
+
+<file path="package.json">
+{
+  "name": "sdev",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.8.0",
+    "class-variance-authority": "^0.7.1",
+    "cn": "^0.4.0",
+    "lucide-react": "^1.52.0",
+    "next": "16.3.6",
+    "next-themes": "^0.4.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "shadcn": "^4.21.3",
+    "tw-animate-css": "^1.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.6",
+    "prettier": "^3.9.9",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+</file>
+
+<file path="postcss.config.mjs">
+
+</file>
+
+<file path="README.md">
+# Next.js template
+
+This is a Next.js template with shadcn/ui.
+
+## Adding components
+
+To add components to your app, run the following command:
+
+```bash
+npx shadcn@latest add button
+```
+
+This will place the ui components in the `components` directory.
+
+## Using components
+
+To use the components in your app, import them as follows:
+
+```tsx
+import { Button } from "@/components/ui/button";
+```
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}
+</file>
+
+<file path="app/globals.css">
+@custom-variant dark (&:is(.dark *));
+⋮----
+@theme inline {
+⋮----
+:root {
+⋮----
+.dark {
+⋮----
+@layer base {
+⋮----
+* {
+body {
+html {
+⋮----
+@apply font-sans;
+</file>
+
+<file path="app/page.tsx">
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Code2,
+  Layers3,
+  Play,
+  Sparkles,
+  Terminal,
+  Zap,
+} from "lucide-react"
+import Link from "next/link"
+import { LoginForm } from "@/components/login-form"
+import { HomeHeader } from "@/components/layout/home-header"
+import { HomeFooter } from "@/components/layout/home-footer"
+import { PageShell } from "@/components/layout/page-shell"
+⋮----
+function CodeWindow()
+</file>
+
+<file path="components/theme-toggle.tsx">
+import { useSyncExternalStore } from "react"
+import { useTheme } from "next-themes"
+import { Moon, Sun } from "lucide-react"
+</file>
+
+<file path="AGENTS.md">
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
+
+## SDEV UI rules
+
+Before creating or changing a page or component, read [DESIGN.md](./DESIGN.md). Inspect shared theme tokens in `app/globals.css`. The homepage at `app/page.tsx` is the visual reference.
+
+- Keep `app/globals.css` for Tailwind, shadcn theme tokens, and shared base rules. Style the homepage and its components with Tailwind utilities.
+- Build other routes with shadcn components in `components/ui/` and Tailwind classes. Add shared components under `components/` when behavior or structure is reused.
+- Put route headers and footers in `components/layout/`. Use `PageShell` there and in pages for consistent container widths and horizontal gutters.
+- Keep the learning workspace full width so its lesson, article, and playground panes have room on desktop.
+
+- Keep the SDEV Spectrum visual language consistent across routes: deep navy and violet as the base, cyan and pink as accents, soft glow, subtle borders, rounded panels, and code-inspired details.
+- Use the semantic `--sdev-*` and shadcn theme tokens in `app/globals.css`. Add or adjust both dark and light values when introducing a token. Do not scatter new one-off hex colors through components.
+- Reuse the homepage Tailwind patterns within the homepage. Other routes should use shadcn components and Tailwind classes. Shared behavior belongs in a component under `components/`.
+- Every new page must support both `.dark` and `.light` themes through `next-themes`, including readable text, borders, inputs, hover, and focus states.
+- Match the homepage typography, spacing, radii, and motion guidance in `DESIGN.md`. Keep animation smooth and restrained, and respect `prefers-reduced-motion`.
+- Use Vietnamese for user-facing copy. Use semantic HTML, visible keyboard focus, accessible labels, and responsive layouts.
+- After UI changes, run `npm run typecheck` and `npm run lint`. Check a production build when the environment permits it.
+</file>
+
+<file path="DESIGN.md">
+# SDEV Spectrum — UI design rules
+
+This file is the visual contract for future SDEV Team pages and components. Use the homepage (`app/page.tsx`) and its Tailwind classes as the visual reference. `app/globals.css` holds Tailwind, shadcn theme variables, and shared base rules. The project uses Next.js, Tailwind CSS, shadcn primitives, and Lucide icons. “Spectrum” names SDEV's colorful visual direction; there is no Adobe React Spectrum package installed.
+
+## Product character
+
+- Audience: developers learning frontend, backend, and fullstack development.
+- Feel: ambitious, polished, technical, welcoming. Prefer a clean reading hierarchy over decorative density.
+- Copy: Vietnamese, direct and encouraging. Short English code or developer phrases may be used as accents.
+- Visual motifs: editor windows, monospace labels, fine orbit lines, soft violet glow, tiny status indicators. Decoration should support the content.
+
+## Color system
+
+The homepage and other routes use Tailwind utilities backed by the theme variables in `app/globals.css`. They switch with the `.dark` class from `next-themes`.
+
+| Token | Dark | Light | Use |
+| --- | --- | --- | --- |
+| `--sdev-bg` | `#080914` | `#f6f4fb` | Page background |
+| `--sdev-surface` | `#111223` | `#fff` | Inputs, panels |
+| `--sdev-surface-raised` | `#1b1a32` | `#f4f0fb` | Cards, elevated areas |
+| `--sdev-text` | `#f7f7fc` | `#1e1a32` | Primary text |
+| `--sdev-text-muted` | `#a9aabc` | `#655f77` | Body and supporting text |
+| `--sdev-border` | translucent violet | `#d7c9ef` | Panel borders |
+| `--sdev-accent` | `#a98cff` | `#764abf` | Links, emphasis, small labels |
+| `--sdev-accent-strong` | `#724fee` | `#6544ab` | Strong actions |
+| `--sdev-cyan` | `#78d6e9` | `#21899f` | Secondary subject accent |
+| `--sdev-pink` | `#ed9bda` | `#a64993` | Third subject accent |
+| `--sdev-gold` | `#f4c766` | `#a86d16` | Coin icon |
+| `--sdev-focus` | `#ae8fff` | `#8159ce` | Keyboard focus |
+
+The primary button uses `--sdev-action-start` and `--sdev-action-end` for its violet gradient, with white text in both themes. Keep violet as the main action color. Use cyan and pink to distinguish content categories, not as competing primary buttons.
+
+For a new color, define a semantic token in **both** themes first. Verify contrast on its actual surface. Do not copy a dark surface color into the light theme.
+
+## Typography
+
+- Body: `--font-sans` (currently Arial/Helvetica fallback stack). Code, indices, technology names, and section kickers: `--font-mono`.
+- Hero headline: 54–86 px on desktop, approximately 45–61 px on small screens; tight line height around 1.04 and letter spacing around `-.075em`.
+- Section headlines: 40–62 px, line height around 1.08, letter spacing around `-.065em`.
+- Card titles: around 22 px. Body copy: 12–16 px depending on context, with 1.6–1.8 line height.
+- Eyebrows and status labels: 9–10 px monospace, bold, uppercase, and spaced letters. Use them sparingly.
+- Prefer a two-level headline: strong neutral text plus one violet gradient or accent phrase.
+
+## Layout and spacing
+
+- Use `PageShell` from `components/layout/page-shell.tsx` for page widths and horizontal gutters. `size="wide"` is up to 1400 px; the default content size is up to 1280 px. `as="main"` also sets the standard page spacing. Keep section-specific layout classes on content inside the shell.
+- The learning workspace is an immersive three-pane screen and spans the full viewport width. Its panes own their padding.
+- On tablet, use 22 px side gutters; on small phones, 18 px.
+- Section spacing: around 100–125 px vertically on desktop, around 70–85 px on mobile.
+- Standard gaps: 8, 12, 20, 28, 40, 60 px. Keep related controls close and sections clearly separated.
+- Cards use 16–24 px radius, around 20–25 px internal padding, a thin border, and a soft shadow. Controls use 7–10 px radius.
+- At 820 px and below, stack multi-column sections. At 520 px and below, reduce headline and illustration scale.
+
+## Components and states
+
+| Need | Reuse or match | Behavior |
+| --- | --- | --- |
+| Primary CTA | Homepage link pattern | 50 px minimum height, violet gradient, 9 px radius, lift on hover |
+| Header action | Homepage outline link | Outline violet, 9 px radius, subtle fill on hover |
+| Secondary action | Text link | Text and icon, no competing filled background |
+| Icon action | `ThemeToggle` | 44 × 44 px, accessible name, visible focus |
+| Google login | `LoginForm` | Full-width button, 52 px minimum height, centered provider icon and label, clear hover and status feedback |
+| Content card | Homepage course article | Subject accent and elevation on hover |
+| Section label | Homepage kicker utility string | Small uppercase monospace, bracketed wording |
+
+These patterns describe the homepage. For other routes, use shadcn components and Tailwind classes with the shared theme tokens. For reusable actions, prefer a component over copying large utility strings. All buttons need hover, focus-visible, disabled, and loading states when applicable. A link that navigates should be an anchor; a button that changes state should be a button. Do not make decorative UI look actionable.
+
+## Motion
+
+- Entrance: subtle fade and 20 px rise, around 0.8 seconds.
+- Hover: 0.2–0.3 seconds; lift controls by 2–3 px and cards by up to 8 px.
+- Ambient floating and ticker may run continuously, but must not interrupt reading or interaction.
+- Animate opacity and transforms when possible. Avoid layout shifts and heavy blur animation.
+- Honor the existing `prefers-reduced-motion` rule. Keep keyboard focus visible regardless of motion preference.
+
+## Theme and implementation
+
+- The theme provider is `components/theme-provider.tsx`; the visible toggle is `components/theme-toggle.tsx`. Keep dark and light visual quality equal.
+- Default theme follows the operating system, and users can switch with the header button or `d` hotkey when not typing.
+- Keep most page content in Server Components. Isolate interactive pieces as Client Components, as with `components/login-form.tsx`.
+- Use `lucide-react` icons at a consistent stroke width (usually 1.6–2). Check that an icon export exists in the installed version.
+- The current Google login card is a UI prototype. Do not imply authentication succeeds until an auth API is connected.
+- Keep the login card compact: brand, headline, brief explanation, one Google action, then a quiet link to courses. Avoid extra status labels and decorative separators.
+- The login card uses the supplied transparent character illustration at `app/(public)/banner/character.png` as a small accent in its upper-right corner. Keep text and actions unobstructed in both themes and on narrow screens.
+- Before shipping a new screen: inspect it at desktop and mobile widths in both themes, then run `npm run typecheck` and `npm run lint`.
+</file>
+
+</files>

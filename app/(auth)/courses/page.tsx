@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { CourseCatalog } from "./_components/course-catalog"
+import { CourseCatalog } from "../../../components/courses/course-catalog"
 import { courses } from "./_data/courses"
+import { PageShell } from "@/components/layout/page-shell"
 
 export const metadata: Metadata = {
   title: "Danh sách khóa học | SDEV Team",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function CoursesPage() {
   return (
-    <main className="mx-auto w-full max-w-[1280px] px-[18px] pt-10 pb-20 sm:px-[22px] sm:pb-24 lg:px-12">
+    <PageShell as="main">
       <nav
         aria-label="Đường dẫn"
         className="flex items-center gap-2 text-xs text-muted-foreground"
@@ -47,6 +48,6 @@ export default function CoursesPage() {
       </div>
 
       <CourseCatalog />
-    </main>
+    </PageShell>
   )
 }

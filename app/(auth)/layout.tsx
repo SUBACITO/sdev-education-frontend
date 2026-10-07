@@ -1,14 +1,14 @@
-import { CatalogFooter } from "@/components/catalog-footer"
-import { CatalogHeader } from "@/components/catalog-header"
+import { AuthFooter } from "@/components/layout/auth-footer"
+import { AuthHeader } from "@/components/layout/auth-header"
 
 export default function AuthLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <CatalogHeader />
+      <AuthHeader />
       <div className="flex-1">{children}</div>
-      <CatalogFooter />
+      <AuthFooter />
     </div>
   )
 }

@@ -1,11 +1,12 @@
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { BrandLogo } from "@/components/brand-logo"
+import { PageShell } from "./page-shell"
 
-export function CatalogFooter() {
+export function AuthFooter() {
   return (
     <footer className="border-t border-border/70">
-      <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-[18px] py-8 text-xs text-muted-foreground sm:px-[22px] lg:px-12">
+      <PageShell className="flex flex-wrap items-center justify-between gap-4 py-8 text-xs text-muted-foreground">
         <BrandLogo href="/" compact />
         <span>© 2026 SDEV Team</span>
         <Link
@@ -14,7 +15,7 @@ export function CatalogFooter() {
         >
           Về trang chủ <ArrowUpRight className="size-3" />
         </Link>
-      </div>
+      </PageShell>
     </footer>
   )
 }

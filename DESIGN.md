@@ -1,6 +1,6 @@
 # SDEV Spectrum — UI design rules
 
-This file is the visual contract for future SDEV Team pages and components. Use the homepage (`app/page.tsx`) and its scoped styles (`app/home.css`) as the visual reference. `app/globals.css` holds Tailwind, shadcn theme variables, and shared base rules. The project uses Next.js, Tailwind CSS, shadcn primitives, Lucide icons, and custom CSS. “Spectrum” names SDEV's colorful visual direction; there is no Adobe React Spectrum package installed.
+This file is the visual contract for future SDEV Team pages and components. Use the homepage (`app/page.tsx`) and its Tailwind classes as the visual reference. `app/globals.css` holds Tailwind, shadcn theme variables, and shared base rules. The project uses Next.js, Tailwind CSS, shadcn primitives, and Lucide icons. “Spectrum” names SDEV's colorful visual direction; there is no Adobe React Spectrum package installed.
 
 ## Product character
 
@@ -11,7 +11,7 @@ This file is the visual contract for future SDEV Team pages and components. Use 
 
 ## Color system
 
-The homepage uses semantic CSS variables scoped to `.site-shell`; they switch with the `.light` class from `next-themes`. Other routes should use shadcn components and Tailwind utilities backed by the matching theme variables in `app/globals.css`.
+The homepage and other routes use Tailwind utilities backed by the theme variables in `app/globals.css`. They switch with the `.dark` class from `next-themes`.
 
 | Token | Dark | Light | Use |
 | --- | --- | --- | --- |
@@ -28,7 +28,7 @@ The homepage uses semantic CSS variables scoped to `.site-shell`; they switch wi
 | `--sdev-gold` | `#f4c766` | `#a86d16` | Coin icon |
 | `--sdev-focus` | `#ae8fff` | `#8159ce` | Keyboard focus |
 
-The primary button gradient is `--sdev-button-gradient`: `#a87fff → #724fee` at 110 degrees, with white text in both themes. Keep violet as the main action color. Use cyan and pink to distinguish content categories, not as competing primary buttons.
+The primary button uses `--sdev-action-start` and `--sdev-action-end` for its violet gradient, with white text in both themes. Keep violet as the main action color. Use cyan and pink to distinguish content categories, not as competing primary buttons.
 
 For a new color, define a semantic token in **both** themes first. Verify contrast on its actual surface. Do not copy a dark surface color into the light theme.
 
@@ -43,8 +43,8 @@ For a new color, define a semantic token in **both** themes first. Verify contra
 
 ## Layout and spacing
 
-- Wide container: `.container` = up to 1400 px with 48 px side gutters on desktop.
-- Content container: `.section-container` = up to 1280 px with the same gutters.
+- Use `PageShell` from `components/layout/page-shell.tsx` for page widths and horizontal gutters. `size="wide"` is up to 1400 px; the default content size is up to 1280 px. `as="main"` also sets the standard page spacing. Keep section-specific layout classes on content inside the shell.
+- The learning workspace is an immersive three-pane screen and spans the full viewport width. Its panes own their padding.
 - On tablet, use 22 px side gutters; on small phones, 18 px.
 - Section spacing: around 100–125 px vertically on desktop, around 70–85 px on mobile.
 - Standard gaps: 8, 12, 20, 28, 40, 60 px. Keep related controls close and sections clearly separated.
@@ -55,15 +55,15 @@ For a new color, define a semantic token in **both** themes first. Verify contra
 
 | Need | Reuse or match | Behavior |
 | --- | --- | --- |
-| Primary CTA | `.button-primary` | 50 px minimum height, violet gradient, 9 px radius, lift 3 px on hover |
-| Header action | `.header-cta` | Outline violet, 9 px radius, subtle fill on hover |
-| Secondary action | `.button-ghost` or `.text-link` | Text and icon, no competing filled background |
-| Icon action | `.theme-toggle` | 43 × 43 px, accessible name, visible focus |
-| Google login | `.google-login` | Full-width white button, 52 px minimum height, centered provider icon and label, clear hover and status feedback |
-| Content card | `.course-card` | Subject accent, subtle decorative ring, elevation on hover |
-| Section label | `.section-kicker` | Small uppercase monospace, bracketed wording |
+| Primary CTA | Homepage link pattern | 50 px minimum height, violet gradient, 9 px radius, lift on hover |
+| Header action | Homepage outline link | Outline violet, 9 px radius, subtle fill on hover |
+| Secondary action | Text link | Text and icon, no competing filled background |
+| Icon action | `ThemeToggle` | 44 × 44 px, accessible name, visible focus |
+| Google login | `LoginForm` | Full-width button, 52 px minimum height, centered provider icon and label, clear hover and status feedback |
+| Content card | Homepage course article | Subject accent and elevation on hover |
+| Section label | Homepage kicker utility string | Small uppercase monospace, bracketed wording |
 
-These class patterns describe the homepage. For other routes, use shadcn components and Tailwind classes with the shared theme tokens. For reusable actions, prefer a component over copying large CSS blocks. All buttons need hover, focus-visible, disabled, and loading states when applicable. A link that navigates should be an anchor; a button that changes state should be a button. Do not make decorative UI look actionable.
+These patterns describe the homepage. For other routes, use shadcn components and Tailwind classes with the shared theme tokens. For reusable actions, prefer a component over copying large utility strings. All buttons need hover, focus-visible, disabled, and loading states when applicable. A link that navigates should be an anchor; a button that changes state should be a button. Do not make decorative UI look actionable.
 
 ## Motion
 

@@ -10,14 +10,16 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## SDEV UI rules
 
-Before creating or changing a page or component, read [DESIGN.md](./DESIGN.md). Inspect shared theme tokens in `app/globals.css` and homepage-only styles in `app/home.css`. The homepage at `app/page.tsx` is the visual reference.
+Before creating or changing a page or component, read [DESIGN.md](./DESIGN.md). Inspect shared theme tokens in `app/globals.css`. The homepage at `app/page.tsx` is the visual reference.
 
-- Keep `app/globals.css` for Tailwind, shadcn theme tokens, and shared base rules. Homepage selectors belong in `app/home.css` and must stay scoped under `.site-shell`.
+- Keep `app/globals.css` for Tailwind, shadcn theme tokens, and shared base rules. Style the homepage and its components with Tailwind utilities.
 - Build other routes with shadcn components in `components/ui/` and Tailwind classes. Add shared components under `components/` when behavior or structure is reused.
+- Put route headers and footers in `components/layout/`. Use `PageShell` there and in pages for consistent container widths and horizontal gutters.
+- Keep the learning workspace full width so its lesson, article, and playground panes have room on desktop.
 
 - Keep the SDEV Spectrum visual language consistent across routes: deep navy and violet as the base, cyan and pink as accents, soft glow, subtle borders, rounded panels, and code-inspired details.
-- Use the semantic `--sdev-*` tokens defined on `.site-shell` in `app/globals.css` for homepage styling. Use the matching shadcn theme tokens in `app/globals.css` on other routes. Add or adjust both dark and light values when introducing a token. Do not scatter new one-off hex colors through components.
-- Reuse the homepage patterns (`.button-primary`, `.header-cta`, `.google-login`, `.course-card`, `.section-kicker`, `.section-container`) within the homepage. Other routes should use shadcn components and Tailwind classes. Shared behavior belongs in a component under `components/`.
+- Use the semantic `--sdev-*` and shadcn theme tokens in `app/globals.css`. Add or adjust both dark and light values when introducing a token. Do not scatter new one-off hex colors through components.
+- Reuse the homepage Tailwind patterns within the homepage. Other routes should use shadcn components and Tailwind classes. Shared behavior belongs in a component under `components/`.
 - Every new page must support both `.dark` and `.light` themes through `next-themes`, including readable text, borders, inputs, hover, and focus states.
 - Match the homepage typography, spacing, radii, and motion guidance in `DESIGN.md`. Keep animation smooth and restrained, and respect `prefers-reduced-motion`.
 - Use Vietnamese for user-facing copy. Use semantic HTML, visible keyboard focus, accessible labels, and responsive layouts.
